@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        body{
+            background-color: black;
+            color:white;
+        }
+        
+        .container{
+            margin-top:200px;
+        }
+        
+        .digit{
+            font-size:60px;
+            font-weight:bold;
+            display: flex;
+            justify-content:center;
+        }
+        
+        .txt{
+            margin:4px 5px;
+        }
+        
+        .button{
+            display: flex;
+            justify-content:center;
+        }
+        
+        .inner-btn{
+            border:none;
+            border-bottom:1px solid white;
+            background-color:black;
+            color:white;
+            font-size: 18px;
+            margin:4px 5px;
+            font-weight:bold;
+            padding:5px;
+        }
+        
+        .inner-btn:hover{
+            border:none;
+        }
+    </style>
+    <title>Page title</title>
+</head>
+<body>
+    <div class="container">
+        <div class="digit">
+            <span class="txt" id="hr">00</span>
+            <span class="txt" id="min">00</span>
+            <span class="txt" id="sec">00</span>
+            <span class="txt" id="mili">00</span>
+        </div>
+        <div class="button">
+            <button class="inner-btn" onclick="start()">Start</button>
+            
+            <button class="inner-btn" onclick="stop()">Stop</button>
+            
+            <button class="inner-btn" onclick="reset()">Reset</button>
+        </div>
+    </div>
+    
+    <script>
+        
+        let hr=0;
+        let min=0;
+        let sec=0;
+        let mili=0;
+        
+        let timer=false;
+        
+        function start(){
+            timer=true;
+            
+            main();
+        }
+        
+        function stop(){
+            timer=false;
+        }
+        
+        function reset(){
+            timer=false;
+            
+            hr=0;
+            min=0;
+            sec=0;
+            mili=0;
+            
+            document.getElementById("hr").innerHTML="00"
+            document.getElementById("min").innerHTML="00"
+            document.getElementById("sec").innerHTML="00"
+            document.getElementById("mili").innerHTML="00"
+        }
+        
+        
+       function main(){
+       
+       let hrS= hr;
+       let minS=min;
+       let secS=sec;
+       let miliS=mili;
+       
+       if(hr<10){
+           hrS="0"+hr;
+       }
+       
+       if(min<10){
+           minS="0"+min;
+       }
+       
+       if(sec<10){
+           secS="0"+sec;
+       }
+       
+       if(mili<10){
+           miliS="0"+mili;
+       }
+       
+           if(timer==true){
+               mili=mili+1;
+               
+               if(mili==100){
+                   sec=sec+1;
+                   mili=0;
+               }
+               
+               if(sec==60){
+                   min=min+1;
+                   sec=0;
+               }
+               
+               if(min==60){
+                   hr=hr+1;
+                   min=0;
+               }
+               
+               setTimeout("main()",10);
+               
+               document.getElementById("hr").innerHTML=hrS;
+               document.getElementById("min").innerHTML=minS;
+               document.getElementById("sec").innerHTML=secS;
+              document.getElementById("mili").innerHTML=miliS;
+           }
+       }
+
+        
+    </script>
+</body>
+</html>
